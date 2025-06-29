@@ -1,0 +1,44 @@
+# -----------------------------------------------------
+# ALIASES
+# -----------------------------------------------------
+
+# -----------------------------------------------------
+# General
+# -----------------------------------------------------
+alias ls='eza -a --icons=always'
+alias ll='eza -al --icons=always'
+alias lt='eza -a --tree --level=1 --icons=always'
+alias shutdown='systemctl poweroff'
+alias sudo=sudo-rs
+
+_git_wrapper_completion() {
+  compdef _git git
+}
+
+git() {
+  if [ -z "$1" ]; then
+    lazygit
+  else
+    command git "$@"
+  fi
+}
+
+if command -v compdef >/dev/null 2>&1; then 
+  _git_wrapper_completion
+fi
+
+_docker_wrapper_completion() {
+  compdef _docker docker
+}
+
+docker() {
+  if [ -z "$1" ]; then
+    lazydocker
+  else
+    command docker "$@"
+  fi
+}
+
+if command -v compdef >/dev/null 2>&1; then # Check if compdef is available (Zsh)
+  _docker_wrapper_completion
+fi
