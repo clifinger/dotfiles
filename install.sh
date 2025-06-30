@@ -50,7 +50,7 @@ fi
 log "Installing all other packages via yay..."
 yay -S --needed --noconfirm \
     curl stow kitty zsh lazygit lazydocker neovim mise \
-    ttf-fira-code-nerd docker docker-compose ripgrep fd jq btop unzip fzf fastfetch oh-my-posh
+    nerd-fonts docker docker-compose ripgrep fd jq btop unzip fzf fastfetch oh-my-posh
 
 # --- Oh My Zsh Installation ---
 
