@@ -91,8 +91,8 @@ log "Symlinking dotfiles with stow..."
 
 # --- Mise Configuration ---
 
-log "Setting up mise with jdx..."
-mise use --global jdx
+log "Setting up mise..."
+# The configuration is now handled by the config.toml file managed by stow.
 
 # --- Change Default Shell ---
 
