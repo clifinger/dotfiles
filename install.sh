@@ -87,7 +87,7 @@ fi
 log "Symlinking dotfiles with stow..."
 # Navigate to the dotfiles directory to run stow
 # Use --no-folding to prevent stow from creating subdirectories in the target.
-(cd "$HOME/dotfiles" && stow --target="$HOME" --no-folding zsh kitty)
+(cd "$HOME/dotfiles" && stow --target="$HOME" --no-folding zsh kitty mise)
 
 # --- Mise Configuration ---
 

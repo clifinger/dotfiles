@@ -20,7 +20,7 @@ This setup installs and configures the following tools:
 *   **Editor:** Neovim (with my personal config from [github.com/clifinger/nvim](https://github.com/clifinger/nvim))
 *   **Git Tools:** `lazygit`
 *   **Containerization:** `docker`, `docker-compose`, `lazydocker`
-*   **Version Manager:** `mise` (with `jdx`)
+*   **Version Manager:** `mise` (with a predefined `config.toml` for Erlang, Go, Rust, Node, Elixir, and Postgres)
 *   **Font:** Fira Code Nerd Font
 *   **AUR Helper:** `yay`
 
