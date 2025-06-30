@@ -29,12 +29,10 @@ sudo -v
 # Keep sudo session alive
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-# --- Package Installation ---
+# --- Initial Package Installation (for yay) ---
 
-log "Installing base packages via pacman..."
-sudo pacman -S --needed --noconfirm \
-    git base-devel curl stow kitty zsh lazygit lazydocker neovim mise \
-    ttf-fira-code-nerd docker docker-compose ripgrep fd jq btop unzip fzf fastfetch
+log "Installing essential packages for yay via pacman..."
+sudo pacman -S --needed --noconfirm git base-devel
 
 # --- yay (AUR Helper) Installation ---
 
@@ -47,10 +45,12 @@ else
     warn "yay is already installed."
 fi
 
-# --- AUR Package Installation ---
+# --- All Other Package Installation via yay ---
 
-log "Installing AUR packages via yay..."
-yay -S --needed --noconfirm oh-my-posh
+log "Installing all other packages via yay..."
+yay -S --needed --noconfirm \
+    curl stow kitty zsh lazygit lazydocker neovim mise \
+    ttf-fira-code-nerd docker docker-compose ripgrep fd jq btop unzip fzf fastfetch oh-my-posh
 
 # --- Oh My Zsh Installation ---
 
@@ -72,7 +72,7 @@ if [ ! -d "${ZSH_CUSTOM}/plugins/zsh-autosuggestions" ]; then
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
 else
     warn "zsh-autosuggestions already installed."
-fi
+}
 
 if [ ! -d "${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting" ]; then
     git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
