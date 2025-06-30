@@ -14,7 +14,7 @@ To set up a new Arch Linux machine with this configuration, run the following co
 
 This setup installs and configures the following tools:
 
-*   **Core Utilities:** `curl`, `git`, `stow`, `ripgrep`, `fd`, `jq`, `btop`, `unzip`, `fzf`
+*   **Core Utilities:** `curl`, `git`, `stow`, `ripgrep`, `fd`, `jq`, `btop`, `unzip`, `fzf`, `fastfetch`
 *   **Shell:** Zsh + Oh My Zsh + Oh My Posh
 *   **Terminal:** Kitty
 *   **Editor:** Neovim (with my personal config from [github.com/clifinger/nvim](https://github.com/clifinger/nvim))

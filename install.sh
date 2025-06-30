@@ -34,7 +34,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 log "Installing base packages via pacman..."
 sudo pacman -S --needed --noconfirm \
     git base-devel curl stow kitty zsh lazygit lazydocker neovim mise \
-    ttf-fira-code-nerd docker docker-compose ripgrep fd jq btop unzip fzf
+    ttf-fira-code-nerd docker docker-compose ripgrep fd jq btop unzip fzf fastfetch
 
 # --- yay (AUR Helper) Installation ---
 
