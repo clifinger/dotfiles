@@ -42,3 +42,8 @@ docker() {
 if command -v compdef >/dev/null 2>&1; then # Check if compdef is available (Zsh)
   _docker_wrapper_completion
 fi
+function nvim() {
+    kitty @ set-spacing padding=0 margin=0
+    command nvim "$@"
+    kitty @ set-spacing padding=10 margin=0
+}
