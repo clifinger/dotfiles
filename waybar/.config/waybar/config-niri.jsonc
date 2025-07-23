@@ -1,0 +1,187 @@
+{
+  "layer": "top",
+  "position": "top",
+  "margin-top": 0,
+  "margin-bottom": 0,
+  "margin-left": 10,
+  "margin-right": 10,
+  "spacing": 8, // Gaps between modules (8px)
+
+  "modules-left": [
+    "clock#date",
+    "niri/language",
+    "wireplumber",
+    "network",
+    "tray"
+  ],
+  "modules-center": [
+    "niri/workspaces"
+  ],
+  "modules-right": [
+    "cpu",
+    "memory",
+    //"custom/gpu",
+    "custom/storage",
+    // "temperature",
+    "backlight",
+    "battery",
+    "bluetooth",
+    "custom/power",
+  ],
+  "network": {
+  "format": "{ifname}",
+  "format-wifi": "  {essid}",
+  "format-ethernet": "󰈀  {ifname}",
+  "format-disconnected": "Disconnected",
+  "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+  "tooltip-format-ethernet": "󰈀  {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
+  "tooltip-format-disconnected": "Disconnected",
+  "max-length": 50,
+  "on-click": "kitty --title nmtui -e nmtui connect"
+  },
+  "clock#date": {
+    "format": "🕙 {:%H:%M  📅 %d-%m %a}", // Icon: calendar-alt
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#eebebe'><b>{}</b></span>",
+        "days": "<span color='#ffe6ff'><b>{}</b></span>",
+        "weeks": "<span color='#c6a0f6'><b>W{}</b></span>",
+        "weekdays": "<span color='#eebebe'><b>{}</b></span>",
+        "today": "<span color='#ed8796'><b><u>{}</u></b></span>"
+      }
+    },
+    "justify": "center"
+  },
+  "niri/language": {
+    "format": "{short}",
+  },
+  "wireplumber": {
+    "on-click": "pwvucontrol",
+    "on-click-right": "amixer sset Master toggle 1>/dev/null",
+    "on-scroll-down": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 0.05-",
+    "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 0.05+",
+    "format": "{icon} {volume}%",
+    "format-source": " ",
+    "format-source-muted": " ",
+    "format-muted": "<span foreground='#fab387'>  MUT</span>",
+    "format-icons": {
+      "headphone": " ",
+      "hands-free": " ",
+      "headset": " ",
+      "phone": " ",
+      "portable": " ",
+      "car": " ",
+      "default": " "
+      //"default": [" ", " ", " "]
+    },
+    "justify": "center"
+  },
+  "tray": {
+    "icon-size": 15,
+    "spacing": 10
+  },
+
+  "niri/workspaces": {
+    "on-scroll-up": "hyprctl dispatch workspace e+1 1>/dev/null",
+    "on-scroll-down": "hyprctl dispatch workspace e-1 1>/dev/null",
+    "sort-by-number": true,
+    "active-only": true,
+    "justify": "center",
+  },
+
+  "cpu": {
+    "format": "💻 {usage}% {max_frequency:0.1f}GHz",
+    "on-click": "kitty --title niri-cpu -e btop",
+    "interval": 3,
+    //"max-length": 14,
+    //"min-length": 14,
+    "justify": "center",
+    "tooltip": false
+  },
+  "memory": {
+    "format": "🐏 {used:0.1f}G",
+    "interval": 3,
+    "justify": "center",
+    "tooltip": false,
+    "on-click": "kitty --title niri-memory -e btop",
+
+  },
+  "custom/gpu": {
+    "exec": "~/.config/waybar/modules/gpu-niri.sh",
+    "format": "<span color=\"#ffe6ff\">{}</span>",
+    "return-type": "json",
+    "interval": 3,
+    "justify": "center",
+    "tooltip": false
+  },
+  "custom/storage": {
+    "format": "💾 {}G",
+    "format-alt": "💾 {percentage}%",
+    "format-alt-click": "click",
+    "return-type": "json",
+    "interval": 60,
+    "exec": "~/.config/waybar/modules/storage.sh",
+    "justify": "center",
+    "tooltip": false
+  },
+  "temperature": {
+    "thermal-zone": 1,
+    "interval": 3,
+    "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon/hwmon6",
+		"input-filename": "temp1_input",
+    "critical-threshold": 80,
+    "format-critical": " {temperatureC}°C",
+    "format": "{icon} {temperatureC}°C",
+    "format-icons": [""],
+    //"max-length": 20,
+    //"min-length": 7,
+    "tooltip": false
+  },
+  "backlight": {
+    "device": "tpacpi::thinkvantage",
+    "format": "{icon}{percent}%",
+    "format-icons": ["󰃞 ","󰃟 ","󰃠 "],
+    "on-scroll-down": "brightnessctl s 5%-",
+    "on-scroll-up": "brightnessctl s +5%",
+    "justify": "center",
+    "tooltip": false
+  },
+  "battery": {
+    "interval": 30,
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}",
+    "format-charging": " {capacity}",
+    "format-plugged": " {capacity}",
+    "format-icons": [
+      " ",
+      " ",
+      " ",
+      " ",
+      " "
+    ],
+    "justify": "center"
+  },
+  "custom/power": {
+    "format": "  ",
+    "tooltip": false,
+    "on-click": "/home/julien/niri-setup/scripts/wlogout.sh",
+    "justify": "center"
+  },
+  "bluetooth": {
+    "format": "󰂯 {status}",
+    "format-disabled": "󰂲", // optional
+    "format-connected": "󰂯 {device_alias}",
+    "tooltip-format": "{device_alias} ({device_address})",
+    "tooltip-format-connected": "{device_alias} ({device_address}) - {device_battery_percentage}%",
+    "on-click": "plasmawindowed org.kde.plasma.bluetooth"
+  }
+}
