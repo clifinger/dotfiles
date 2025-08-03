@@ -40,7 +40,6 @@ zinit snippet OMZP::aws
 zinit snippet OMZP::kubectl
 zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
-
 # Load completions
 autoload -Uz compinit && compinit
 
@@ -83,4 +82,4 @@ alias c='clear'
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
-
+bindkey '^[[A' fzf-history-widget

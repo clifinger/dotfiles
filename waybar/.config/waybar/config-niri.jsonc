@@ -37,7 +37,7 @@
   "tooltip-format-ethernet": "󰈀  {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
   "tooltip-format-disconnected": "Disconnected",
   "max-length": 50,
-  "on-click": "kitty --title nmtui -e nmtui connect"
+  "on-click": "kitty --title Impala --class Impala -e impala"
   },
   "clock#date": {
     "format": "🕙 {:%H:%M  📅 %d-%m %a}", // Icon: calendar-alt
@@ -61,10 +61,9 @@
     "format": "{short}",
   },
   "wireplumber": {
-    "on-click": "pwvucontrol",
-    "on-click-right": "amixer sset Master toggle 1>/dev/null",
-    "on-scroll-down": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 0.05-",
-    "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 0.05+",
+    "on-click": "kitty --title Wiremix --class Wiremix -e wiremix",
+    "on-click-right": "pamixer -t",
+    "scroll-step": 5,
     "format": "{icon} {volume}%",
     "format-source": " ",
     "format-source-muted": " ",
@@ -182,6 +181,6 @@
     "format-connected": "󰂯 {device_alias}",
     "tooltip-format": "{device_alias} ({device_address})",
     "tooltip-format-connected": "{device_alias} ({device_address}) - {device_battery_percentage}%",
-    "on-click": "plasmawindowed org.kde.plasma.bluetooth"
+    "on-click": "blueberry",
   }
 }

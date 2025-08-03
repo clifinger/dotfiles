@@ -5,23 +5,23 @@
 // Place your monitors from left to right.
 
 // Monitor 1: Lenovo Laptop (Left)
-output "eDP-1" {
+output "Lenovo Group Limited 0x41B0 Unknown" {
     off // Turn off the laptop screen
 }
 
-// Monitor 2: HP 27" (Middle) 
-output "DP-6" {
+// Monitor 2: HP 27" (Left)
+output "Hewlett Packard HP Z27n CNK72307H3" {
     mode "2560x1440@60";
     scale 1.0;
-    position x=1707 y=0;
+    position x=0 y=0;
 }
 
 // Monitor 3: Xiaomi 4K (Right)
-output "DP-5" {
+output "Xiaomi Corporation Mi Monitor 6638000002298" {
     mode "3840x2160@60";
     scale 1.5;
-    // Position starts after the HP monitor ends (1707 + 2560 = 4267)
-    position x=4267 y=0;
+    // Positioned to the right of the HP monitor, with top edges aligned.
+    position x=2560 y=0;
 }
 // Input device configuration.
 // Find the full list of options on the wiki:
@@ -65,8 +65,8 @@ layout {
     default-column-width { proportion 0.99999; }
     focus-ring {
         width 2
-        active-color "#6c9deb"
-        inactive-color "#0b0b0c"
+        active-color "#9ccfd8"
+        inactive-color "#6e6a86"
     }
     border {
         off
@@ -94,11 +94,12 @@ spawn-at-startup "dunst" "-conf" "/home/julien/niri-setup/dunst/dunstrc"
 spawn-at-startup "sh" "-c" "pkill swayidle; echo '10 minutes' > /tmp/idle-time; /home/julien/niri-setup/scripts/swayidle.sh"
 // statup discord minimized
 spawn-at-startup "sh" "-c" "sleep 5; discord --start-minimized &"
+spawn-at-startup "sh" "-c" "sleep 2; anytype --start-minimized &"
 
 
 // workspace background and backdrop
 spawn-at-startup "sh" "-c" "swww-daemon & swww img /home/julien/niri-setup/wallpapers/backdrop.jpg"
-spawn-at-startup "swaybg" "-i" "/home/julien/Pictures/Wallpapers/wallpapers/CuteCat.png" "-m" "fit" "-c" "#000000"
+spawn-at-startup "swaybg" "-i" "/home/julien/Pictures/Wallpapers/wallpapers/Fantasy-Hongkong.png" "-m" "fill" "-c" "#000000"
 layer-rule {
     match namespace="^swww-daemon$"
     place-within-backdrop true
@@ -120,7 +121,9 @@ window-rule {
     match app-id="firefox"
     match app-id="code"
     match app-id="dev.zed.Zed"
+    exclude app-id="firefox" title=".*YouTube.*"
     default-column-width { proportion 1.0; }
+    opacity 0.95
 }
 window-rule {
     match app-id="org.gnome.Calculator"
@@ -147,6 +150,7 @@ binds {
     Mod+Ctrl+Return             { spawn "fuzzel" "--config" "/home/julien/niri-setup/fuzzel/fuzzel.ini"; }
     Mod+Shift+Return            { spawn "firefox"; }
     Mod+B                       { spawn "firefox"; }
+    Mod+Z                       { spawn "anytype"; }
     Mod+E                       { spawn "kitty" "-o" "window_padding_width=0" "-o" "window_margin_width=0" "-e" "yazi"; }  
     Mod+L                       { spawn "/home/julien/niri-setup/scripts/swaylock.sh"; }
     Mod+C                       { spawn "sh" "-c" "cliphist list | fuzzel --dmenu --config /home/julien/niri-setup/fuzzel/clipboard.ini | cliphist decode | wl-copy"; }
@@ -170,8 +174,10 @@ binds {
     XF86AudioPrev         allow-when-locked=true { spawn "playerctl" "previous"; }
 
     // Windows and Columns
-    MOD+F1               { focus-monitor-left; }
-    MOD+F2               { focus-monitor-right; }
+    Mod+1                { focus-monitor-left; }
+    Mod+2                { focus-monitor-right;}
+    Mod+F1               { move-column-to-monitor-left; }
+    Mod+F2               { move-column-to-monitor-right; }
     Mod+Q                { close-window; }
     Mod+W                { switch-preset-column-width; }
     Mod+H                { switch-preset-window-height; }
