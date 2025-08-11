@@ -12,6 +12,7 @@
     "niri/language",
     "wireplumber",
     "network",
+    //"wlr/taskbar",
     "tray"
   ],
   "modules-center": [
@@ -28,6 +29,9 @@
     "bluetooth",
     "custom/power",
   ],
+  "wlr/taskbar": {
+      "tooltip-format": "{title} | {app_id}",
+  },
   "network": {
   "format": "{ifname}",
   "format-wifi": "  {essid}",

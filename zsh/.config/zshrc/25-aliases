@@ -57,3 +57,8 @@ function y() {
 	rm -f -- "$tmp"
     kitty @ set-spacing padding=10 margin=0
 }
+
+
+# Aliases
+alias vim='NVIM_APPNAME=vim nvim'
+alias c='clear'

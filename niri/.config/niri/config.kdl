@@ -22,7 +22,10 @@ output "Xiaomi Corporation Mi Monitor 6638000002298" {
     scale 1.5;
     // Positioned to the right of the HP monitor, with top edges aligned.
     position x=2560 y=0;
+    focus-at-startup;
 }
+
+
 // Input device configuration.
 // Find the full list of options on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
@@ -60,12 +63,18 @@ layout {
         proportion 0.66667
         proportion 1.0
     }
-    
+    tab-indicator {
+        width 20
+        gap 8
+        length total-proportion=1.0
+        position "top"
+        place-within-column
+    }
 
     default-column-width { proportion 0.99999; }
     focus-ring {
         width 2
-        active-color "#9ccfd8"
+        active-color "#FFFFFF"
         inactive-color "#6e6a86"
     }
     border {
@@ -83,6 +92,8 @@ layout {
 
 
 // startup processes
+spawn-at-startup "firefox"
+spawn-at-startup "kitty"
 spawn-at-startup "udiskie"
 spawn-at-startup "niriswitcher"
 spawn-at-startup "xwayland-satellite"
@@ -93,13 +104,15 @@ spawn-at-startup "~/.config/waybar/waybar-niri.sh"
 spawn-at-startup "dunst" "-conf" "/home/julien/niri-setup/dunst/dunstrc"
 spawn-at-startup "sh" "-c" "pkill swayidle; echo '10 minutes' > /tmp/idle-time; /home/julien/niri-setup/scripts/swayidle.sh"
 // statup discord minimized
-spawn-at-startup "sh" "-c" "sleep 5; discord --start-minimized &"
-spawn-at-startup "sh" "-c" "sleep 2; anytype --start-minimized &"
+spawn-at-startup "sh" "-c" "sleep 1; discord --start-minimized &"
+
+// my anytype never starts minimized, so I use a workaround
+// to start it minimized after a delay.
 
 
 // workspace background and backdrop
-spawn-at-startup "sh" "-c" "swww-daemon & swww img /home/julien/niri-setup/wallpapers/backdrop.jpg"
-spawn-at-startup "swaybg" "-i" "/home/julien/Pictures/Wallpapers/wallpapers/Fantasy-Hongkong.png" "-m" "fill" "-c" "#000000"
+spawn-at-startup "sh" "-c" "swww-daemon & swww img /home/julien/niri-setup/wallpapers/backdrop.png"
+spawn-at-startup "swaybg" "-i" "/home/julien/Pictures/Wallpapers/wallpapers/wallhaven-arch.png" "-m" "fill" "-c" "#000000"
 layer-rule {
     match namespace="^swww-daemon$"
     place-within-backdrop true
@@ -110,21 +123,32 @@ layer-rule {
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Animations
 animations {}
 
+
+
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
 window-rule {
     geometry-corner-radius 10
     clip-to-geometry true
-}
-window-rule {
-    match app-id="firefox"
-    match app-id="code"
-    match app-id="dev.zed.Zed"
-    exclude app-id="firefox" title=".*YouTube.*"
     default-column-width { proportion 1.0; }
-    opacity 0.95
+    open-focused true
 }
+
+window-rule {
+    match app-id="kitty" at-startup=true
+    open-on-output "Xiaomi Corporation Mi Monitor 6638000002298"
+}
+
+// Rules for Firefox
+window-rule {
+    match app-id="firefox" at-startup=true
+    open-focused false
+    open-on-output "Hewlett Packard HP Z27n CNK72307H3"
+}
+
+
+
 window-rule {
     match app-id="org.gnome.Calculator"
     match app-id="com.saivert.pwvucontrol"
@@ -222,7 +246,7 @@ binds {
     Mod+Ctrl+9         { move-column-to-workspace 9; }
     Mod+Ctrl+0         { move-column-to-workspace 10; }
     Mod+A              { toggle-overview; }
-
+    Mod+V { toggle-column-tabbed-display; } 
     // Screenshots
     Print       { screenshot; }
     Ctrl+Print  { screenshot-window; }
@@ -236,6 +260,7 @@ environment {
     DISPLAY ":0"
     QT_QPA_PLATFORM "wayland"
     TFC_COMMAND "yazi --chooser-file=/dev/stdout"
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
 }
 hotkey-overlay {
     skip-at-startup
