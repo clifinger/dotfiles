@@ -23,7 +23,6 @@ if [ -f ~/.zshrc_custom ]; then
     source ~/.zshrc_custom
 fi
 
-eval "$(mise activate zsh)"
 ___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"; if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
 
 # proto
@@ -34,3 +33,5 @@ export TFC_COMMAND="yazi --chooser-file=/dev/stdout"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+eval "$(mise activate zsh)"

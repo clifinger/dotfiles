@@ -1,33 +1,25 @@
-// This config is in the KDL format: https://kdl.dev
-// "/-" comments out the following node.
 // Check the wiki for a full description of the configuration:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Overview
-// Place your monitors from left to right.
 
+// Place your monitors from left to right.
 // Monitor 1: Lenovo Laptop (Left)
 output "Lenovo Group Limited 0x41B0 Unknown" {
     off // Turn off the laptop screen
 }
-
 // Monitor 2: HP 27" (Left)
 output "Hewlett Packard HP Z27n CNK72307H3" {
     mode "2560x1440@60";
     scale 1.0;
     position x=0 y=0;
 }
-
 // Monitor 3: Xiaomi 4K (Right)
 output "Xiaomi Corporation Mi Monitor 6638000002298" {
     mode "3840x2160@60";
     scale 1.5;
-    // Positioned to the right of the HP monitor, with top edges aligned.
     position x=2560 y=0;
     focus-at-startup;
 }
 
-
-// Input device configuration.
-// Find the full list of options on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
 input {
     keyboard {
@@ -42,12 +34,7 @@ input {
     focus-follows-mouse max-scroll-amount="90%"
 }
 
-// Monitor configuration.
-// Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
-// Settings that influence how windows are positioned and sized.
-// Find more information on the wiki:
-// https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 layout {
     gaps 14
     center-focused-column "always"
@@ -64,8 +51,8 @@ layout {
         proportion 1.0
     }
     tab-indicator {
-        width 20
-        gap 8
+        width 10
+        gap 11
         length total-proportion=1.0
         position "top"
         place-within-column
@@ -90,7 +77,6 @@ layout {
 
 }
 
-
 // startup processes
 spawn-at-startup "firefox"
 spawn-at-startup "kitty"
@@ -99,18 +85,10 @@ spawn-at-startup "niriswitcher"
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
-//spawn-at-startup "waybar" "-c" "/home/julien/niri-setup/waybar/config" "-s" "/home/julien/niri-setup/waybar/style.css"
 spawn-at-startup "~/.config/waybar/waybar-niri.sh"
 spawn-at-startup "dunst" "-conf" "/home/julien/niri-setup/dunst/dunstrc"
 spawn-at-startup "sh" "-c" "pkill swayidle; echo '10 minutes' > /tmp/idle-time; /home/julien/niri-setup/scripts/swayidle.sh"
-// statup discord minimized
 spawn-at-startup "sh" "-c" "sleep 1; discord --start-minimized &"
-
-// my anytype never starts minimized, so I use a workaround
-// to start it minimized after a delay.
-
-
-// workspace background and backdrop
 spawn-at-startup "sh" "-c" "swww-daemon & swww img /home/julien/niri-setup/wallpapers/backdrop.png"
 spawn-at-startup "swaybg" "-i" "/home/julien/Pictures/Wallpapers/wallpapers/wallhaven-arch.png" "-m" "fill" "-c" "#000000"
 layer-rule {
@@ -118,15 +96,9 @@ layer-rule {
     place-within-backdrop true
 }
 
-// Animation settings.
-// The wiki explains how to configure individual animations:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Animations
 animations {}
 
-
-
-// Window rules let you adjust behavior for individual windows.
-// Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
 window-rule {
     geometry-corner-radius 10
@@ -135,20 +107,20 @@ window-rule {
     open-focused true
 }
 
+// Rules for Firefox at-startup
 window-rule {
     match app-id="kitty" at-startup=true
     open-on-output "Xiaomi Corporation Mi Monitor 6638000002298"
 }
 
-// Rules for Firefox
+// Rules for Firefox at startup
 window-rule {
     match app-id="firefox" at-startup=true
     open-focused false
     open-on-output "Hewlett Packard HP Z27n CNK72307H3"
 }
 
-
-
+// Rules for Utility Windows
 window-rule {
     match app-id="org.gnome.Calculator"
     match app-id="com.saivert.pwvucontrol"
@@ -163,6 +135,7 @@ window-rule {
     }
 }
 
+// Bindings
 binds {
     Mod+Ctrl+WheelScrollUp      { focus-workspace-up; }
     Mod+Ctrl+WheelScrollDown    { focus-workspace-down; }
@@ -184,7 +157,6 @@ binds {
     Mod+Ctrl+B                  { spawn "/home/julien/niri-setup/scripts/toggle-waybar.sh"; }
     Mod+Ctrl+W                  { spawn "alacritty" "--title" "Wallpaper Selector" "--config-file" "/home/julien/niri-setup/alacritty/float.toml" "-e" "/home/julien/niri-setup/scripts/change-wallpaper.sh"; }
     Mod+Backspace               { spawn "/home/julien/niri-setup/scripts/wlogout.sh"; }
-
 
     // Backlight and Audio
     XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "+5%" ; }
@@ -228,7 +200,6 @@ binds {
     Mod+BracketRight     { consume-or-expel-window-right; }
     Mod+Comma            { consume-window-into-column; }
     Mod+Period           { expel-window-from-column; }
-    Alt+Tab repeat=false { spawn "pkill" "-USR1" "niriswitcher"; }
 
     // Workspaces
     Mod+Page_Down      { focus-workspace-down; }
@@ -247,6 +218,7 @@ binds {
     Mod+Ctrl+0         { move-column-to-workspace 10; }
     Mod+A              { toggle-overview; }
     Mod+V { toggle-column-tabbed-display; } 
+
     // Screenshots
     Print       { screenshot; }
     Ctrl+Print  { screenshot-window; }
@@ -261,6 +233,7 @@ environment {
     QT_QPA_PLATFORM "wayland"
     TFC_COMMAND "yazi --chooser-file=/dev/stdout"
     ELECTRON_OZONE_PLATFORM_HINT "auto"
+    MOZ_ENABLE_WAYLAND "1"
 }
 hotkey-overlay {
     skip-at-startup

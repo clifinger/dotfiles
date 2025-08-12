@@ -60,5 +60,5 @@ function y() {
 
 
 # Aliases
-alias vim='NVIM_APPNAME=vim nvim'
+alias vim='nvim'
 alias c='clear'
