@@ -99,7 +99,7 @@
 
   "cpu": {
     "format": "💻 {usage}% {max_frequency:0.1f}GHz",
-    "on-click": "ghostty -e btop",
+    "on-click": "kitty -e btop",
     "interval": 3,
     //"max-length": 14,
     //"min-length": 14,

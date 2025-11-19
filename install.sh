@@ -72,6 +72,7 @@ FONT_PACKAGES=(
     noto-fonts-cjk
     noto-fonts-emoji
     awesome-terminal-fonts
+    papirus-icon-theme
 )
 
 # Applications
