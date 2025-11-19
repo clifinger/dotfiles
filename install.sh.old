@@ -17,6 +17,9 @@ CORE_PACKAGES=(
     base-devel
     git
     
+    # AUR helper
+    paru
+    
     # CLI tools
     stow                # Dotfiles manager
     curl wget           # Download tools
@@ -32,36 +35,37 @@ CORE_PACKAGES=(
     lazygit             # Git TUI
     docker              # Containers
     docker-compose      # Container orchestration
-    mise                # Version manager
+    mise                # Version manager (asdf alternative)
     github-cli          # gh command
     
     # Shell
     zsh                 # Shell
-    starship            # Prompt
-    zoxide              # Better cd
+    starship           # Prompt
+    zoxide             # Better cd
     
     # Terminal
-    kitty               # Terminal emulator
+    kitty              # Terminal emulator
+    ghostty            # Alternative terminal
     
     # System tools
-    tlp tlp-rdw         # Power management
-    brightnessctl       # Brightness control
-    udiskie             # USB automount
+    tlp tlp-rdw        # Power management
+    brightnessctl      # Brightness control
+    udiskie            # USB automount
 )
 
 # Wayland/Niri WM packages
 WM_PACKAGES=(
-    niri                # Window manager
-    waybar              # Status bar
-    fuzzel              # Launcher
-    dunst               # Notifications
-    swaylock-effects    # Lock screen
-    wlogout             # Logout menu
-    swayidle            # Idle manager
-    swaybg swww         # Wallpaper
-    wl-clipboard        # Clipboard
-    xwayland-satellite  # Xwayland support
-    niriswitcher        # Niri workspace switcher
+    niri               # Window manager
+    waybar             # Status bar
+    fuzzel             # Launcher
+    dunst              # Notifications
+    swaylock-effects   # Lock screen
+    wlogout            # Logout menu
+    swayidle           # Idle manager
+    swaybg swww        # Wallpaper
+    wl-clipboard       # Clipboard
+    xwayland-satellite # Xwayland support
+    niriswitcher       # Niri workspace switcher
 )
 
 # Fonts
@@ -76,19 +80,19 @@ FONT_PACKAGES=(
 
 # Applications
 APP_PACKAGES=(
-    firefox             # Browser
-    anytype-bin         # Notes (AUR)
-    discord             # Chat
-    youtube-music-bin   # Music (AUR)
-    nautilus            # File manager
-    qbittorrent         # Torrent client
-    vlc                 # Media player
+    firefox            # Browser
+    anytype-bin        # Notes (AUR)
+    discord            # Chat
+    youtube-music-bin  # Music (AUR)
+    vlc                # Media player
+    qbittorrent        # Torrent client
 )
 
-# Dev tools
+# Optional dev tools
 DEV_PACKAGES=(
-    zed                # Modern editor
     lazydocker         # Docker TUI
+    yazi               # File manager TUI
+    zed                # Modern editor
 )
 
 # ============================================
@@ -147,9 +151,8 @@ paru -S --needed --noconfirm "${FONT_PACKAGES[@]}"
 log "Installing applications..."
 paru -S --needed --noconfirm "${APP_PACKAGES[@]}"
 
-# Uncomment to install dev tools
-# log "Installing dev tools..."
-# paru -S --needed --noconfirm "${DEV_PACKAGES[@]}"
+log "Installing dev tools..."
+paru -S --needed --noconfirm "${DEV_PACKAGES[@]}"
 
 # Oh My Zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then

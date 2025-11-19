@@ -47,15 +47,6 @@ function nvim() {
     command nvim "$@"
     kitty @ set-spacing padding=10 margin=0
 }
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-    kitty @ set-spacing padding=0 margin=0
-	yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
-	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-	rm -f -- "$tmp"
-    kitty @ set-spacing padding=10 margin=0
-}
 
 
 # Aliases

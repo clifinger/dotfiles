@@ -42,6 +42,7 @@ CORE_PACKAGES=(
     
     # Terminal
     kitty               # Terminal emulator
+    ghostty             # Alternative terminal
     
     # System tools
     tlp tlp-rdw         # Power management
@@ -80,16 +81,17 @@ APP_PACKAGES=(
     anytype-bin         # Notes (AUR)
     discord             # Chat
     youtube-music-bin   # Music (AUR)
-    nautilus            # File manager
-    qbittorrent         # Torrent client
-    vlc                 # Media player
 )
 
-# Dev tools
-DEV_PACKAGES=(
-    zed                # Modern editor
-    lazydocker         # Docker TUI
-)
+# Optional dev tools (commented out by default)
+# Uncomment what you need
+# DEV_PACKAGES=(
+#     lazydocker         # Docker TUI
+#     yazi               # File manager TUI
+#     zed                # Modern editor
+#     vlc                # Media player
+#     qbittorrent        # Torrent client
+# )
 
 # ============================================
 # COLORS & LOGGING

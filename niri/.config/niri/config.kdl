@@ -157,7 +157,7 @@ binds {
         spawn "anytype"
     }
     Mod+E {
-        spawn "kitty" "-o" "window_padding_width=0" "-o" "window_margin_width=0" "-e" "yazi"
+        spawn "nautilus"
     }
     Mod+L {
         spawn "/home/julien/niri-configs/scripts/swaylock.sh"
@@ -357,7 +357,6 @@ prefer-no-csd
 environment {
     DISPLAY ":0"
     QT_QPA_PLATFORM "wayland"
-    TFC_COMMAND "yazi --chooser-file=/dev/stdout"
     ELECTRON_OZONE_PLATFORM_HINT "auto"
     MOZ_ENABLE_WAYLAND "1"
 }
