@@ -196,7 +196,11 @@ fi
 # Stow dotfiles
 log "Symlinking dotfiles with stow..."
 (cd "$HOME/dotfiles" && stow --target="$HOME" --no-folding \
-    zsh kitty mise niri waybar niri-configs local)
+    zsh kitty mise niri waybar local)
+
+# Create niri-configs symlink (not a stow package)
+log "Creating niri-configs symlink..."
+ln -sfn "$HOME/dotfiles/niri-configs" "$HOME/niri-configs"
 
 # TLP configuration
 log "Configuring TLP for battery optimization..."
