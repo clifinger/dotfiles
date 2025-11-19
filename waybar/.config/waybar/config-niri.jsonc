@@ -41,7 +41,7 @@
     "tooltip-format-ethernet": "󰈀  {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
     "tooltip-format-disconnected": "Disconnected",
     "max-length": 50,
-    "on-click": "kitty --title Impala --class Impala -e impala"
+    "on-click": "kitty --class floating -e nmtui-connect"
   },
   "clock#date": {
     "format": "🕙 {:%H:%M  📅 %d-%m %a}", // Icon: calendar-alt
