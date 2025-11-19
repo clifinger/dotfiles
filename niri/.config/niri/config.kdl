@@ -81,9 +81,9 @@ spawn-at-startup "xwayland-satellite"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
 spawn-at-startup "~/.config/waybar/waybar-niri.sh"
-spawn-at-startup "dunst" "-conf" "/home/julien/niri-setup/dunst/dunstrc"
-spawn-at-startup "sh" "-c" "pkill swayidle; echo '10 minutes' > /tmp/idle-time; /home/julien/niri-setup/scripts/swayidle.sh"
-spawn-at-startup "sh" "-c" "swww-daemon & swww img /home/julien/niri-setup/wallpapers/backdrop.png"
+spawn-at-startup "dunst" "-conf" "/home/julien/niri-configs/dunst/dunstrc"
+spawn-at-startup "sh" "-c" "pkill swayidle; echo '10 minutes' > /tmp/idle-time; /home/julien/niri-configs/scripts/swayidle.sh"
+spawn-at-startup "sh" "-c" "swww-daemon & swww img /home/julien/niri-configs/wallpapers/backdrop.png"
 spawn-at-startup "swaybg" "-i" "/home/julien/Pictures/Wallpapers/wallpapers/wallhaven-arch.png" "-m" "fill" "-c" "#000000"
 layer-rule {
     match namespace="^swww-daemon$"
@@ -145,7 +145,7 @@ binds {
         spawn "kitty"
     }
     Mod+Ctrl+Return {
-        spawn "fuzzel" "--config" "/home/julien/niri-setup/fuzzel/fuzzel.ini"
+        spawn "fuzzel" "--config" "/home/julien/niri-configs/fuzzel/fuzzel.ini"
     }
     Mod+Shift+Return {
         spawn "firefox"
@@ -160,19 +160,19 @@ binds {
         spawn "kitty" "-o" "window_padding_width=0" "-o" "window_margin_width=0" "-e" "yazi"
     }
     Mod+L {
-        spawn "/home/julien/niri-setup/scripts/swaylock.sh"
+        spawn "/home/julien/niri-configs/scripts/swaylock.sh"
     }
     Mod+C {
-        spawn "sh" "-c" "cliphist list | fuzzel --dmenu --config /home/julien/niri-setup/fuzzel/clipboard.ini | cliphist decode | wl-copy"
+        spawn "sh" "-c" "cliphist list | fuzzel --dmenu --config /home/julien/niri-configs/fuzzel/clipboard.ini | cliphist decode | wl-copy"
     }
     Mod+I {
-        spawn "/home/julien/niri-setup/scripts/change-idle-time.sh"
+        spawn "/home/julien/niri-configs/scripts/change-idle-time.sh"
     }
     Mod+P {
-        spawn "/home/julien/niri-setup/scripts/change-power-profile.sh"
+        spawn "/home/julien/niri-configs/scripts/change-power-profile.sh"
     }
     Mod+Backspace {
-        spawn "/home/julien/niri-setup/scripts/wlogout.sh"
+        spawn "/home/julien/niri-configs/scripts/wlogout.sh"
     }
     Mod+space {
         spawn "switch-layout"
