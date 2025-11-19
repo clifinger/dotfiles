@@ -9,7 +9,6 @@ alias ls='eza -a --icons=always'
 alias ll='eza -al --icons=always'
 alias lt='eza -a --tree --level=1 --icons=always'
 alias shutdown='systemctl poweroff'
-alias sudo=sudo-rs
 alias man=tldr
 alias cat='bat --style plain --theme=base16' 
 _git_wrapper_completion() {
@@ -62,3 +61,10 @@ function y() {
 # Aliases
 alias vim='nvim'
 alias c='clear'
+
+# -----------------------------------------------------
+# Docker Power Management (Nov 2025)
+# -----------------------------------------------------
+alias don='~/.local/bin/don'     # Docker ON - Démarrer Docker
+alias doff='~/.local/bin/doff'   # Docker OFF - Arrêter Docker (économie batterie)
+alias dstatus='systemctl status docker --no-pager -l'  # Docker status

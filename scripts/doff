@@ -1,0 +1,11 @@
+#!/bin/bash
+# Docker OFF - Arrêter Docker
+
+if systemctl is-active --quiet docker; then
+    echo "🔴 Arrêt de Docker..."
+    sudo systemctl stop docker.socket docker.service
+    echo "✓ Docker désactivé"
+    echo "💡 Économie: ~0.2-0.3W"
+else
+    echo "✓ Docker est déjà désactivé"
+fi

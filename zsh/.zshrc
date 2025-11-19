@@ -34,4 +34,12 @@ export TFC_COMMAND="yazi --chooser-file=/dev/stdout"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+
 eval "$(mise activate zsh)"
+
+# Enable vi mode in zsh
+# set -o vi
+# export KEYTIMEOUT=1
+# bindkey "^H" backward-delete-char
+# bindkey "^?" backward-delete-char
+export PATH="$HOME/.local/bin:$PATH"

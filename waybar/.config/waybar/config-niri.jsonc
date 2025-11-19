@@ -6,7 +6,7 @@
   "margin-left": 10,
   "margin-right": 10,
   "spacing": 8, // Gaps between modules (8px)
-
+  "height": 30,
   "modules-left": [
     "clock#date",
     "niri/language",
@@ -30,18 +30,18 @@
     "custom/power",
   ],
   "wlr/taskbar": {
-      "tooltip-format": "{title} | {app_id}",
+    "tooltip-format": "{title} | {app_id}",
   },
   "network": {
-  "format": "{ifname}",
-  "format-wifi": "  {essid}",
-  "format-ethernet": "󰈀  {ifname}",
-  "format-disconnected": "Disconnected",
-  "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
-  "tooltip-format-ethernet": "󰈀  {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
-  "tooltip-format-disconnected": "Disconnected",
-  "max-length": 50,
-  "on-click": "kitty --title Impala --class Impala -e impala"
+    "format": "{ifname}",
+    "format-wifi": "  {essid}",
+    "format-ethernet": "󰈀  {ifname}",
+    "format-disconnected": "Disconnected",
+    "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+    "tooltip-format-ethernet": "󰈀  {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50,
+    "on-click": "kitty --title Impala --class Impala -e impala"
   },
   "clock#date": {
     "format": "🕙 {:%H:%M  📅 %d-%m %a}", // Icon: calendar-alt
@@ -88,7 +88,6 @@
     "icon-size": 15,
     "spacing": 10
   },
-
   "niri/workspaces": {
     "on-scroll-up": "hyprctl dispatch workspace e+1 1>/dev/null",
     "on-scroll-down": "hyprctl dispatch workspace e-1 1>/dev/null",
@@ -96,7 +95,6 @@
     "active-only": true,
     "justify": "center",
   },
-
   "cpu": {
     "format": "💻 {usage}% {max_frequency:0.1f}GHz",
     "on-click": "kitty --title niri-cpu -e btop",
@@ -112,7 +110,6 @@
     "justify": "center",
     "tooltip": false,
     "on-click": "kitty --title niri-memory -e btop",
-
   },
   "custom/gpu": {
     "exec": "~/.config/waybar/modules/gpu-niri.sh",
@@ -136,11 +133,13 @@
     "thermal-zone": 1,
     "interval": 3,
     "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon/hwmon6",
-		"input-filename": "temp1_input",
+    "input-filename": "temp1_input",
     "critical-threshold": 80,
     "format-critical": " {temperatureC}°C",
     "format": "{icon} {temperatureC}°C",
-    "format-icons": [""],
+    "format-icons": [
+      ""
+    ],
     //"max-length": 20,
     //"min-length": 7,
     "tooltip": false
@@ -148,7 +147,11 @@
   "backlight": {
     "device": "tpacpi::thinkvantage",
     "format": "{icon}{percent}%",
-    "format-icons": ["󰃞 ","󰃟 ","󰃠 "],
+    "format-icons": [
+      "󰃞 ",
+      "󰃟 ",
+      "󰃠 "
+    ],
     "on-scroll-down": "brightnessctl s 5%-",
     "on-scroll-up": "brightnessctl s +5%",
     "justify": "center",
@@ -162,7 +165,7 @@
       "critical": 15
     },
     "format": "{icon} {capacity}",
-    "format-charging": " {capacity}",
+    "format-charging": "󰢜 {capacity}",
     "format-plugged": " {capacity}",
     "format-icons": [
       " ",

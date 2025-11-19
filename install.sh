@@ -33,7 +33,8 @@ fi
 log "Installing all other packages via yay..."
 yay -S --needed --noconfirm \
     curl stow kitty zsh lazygit lazydocker neovim mise \
-    nerd-fonts docker docker-compose ripgrep fd jq btop unzip fzf fastfetch oh-my-posh
+    nerd-fonts docker docker-compose ripgrep fd jq btop unzip fzf fastfetch oh-my-posh \
+    tlp tlp-rdw
 
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     log "Installing Oh My Zsh..."
@@ -78,6 +79,14 @@ fi
 log "Symlinking dotfiles with stow..."
 (cd "$HOME/dotfiles" && stow --target="$HOME" --no-folding zsh kitty mise)
 
+log "Installing power management scripts..."
+mkdir -p "$HOME/.local/bin"
+if [ -f "$HOME/dotfiles/scripts/don" ]; then
+    cp "$HOME/dotfiles/scripts/don" "$HOME/.local/bin/"
+    cp "$HOME/dotfiles/scripts/doff" "$HOME/.local/bin/"
+    chmod +x "$HOME/.local/bin/don" "$HOME/.local/bin/doff"
+fi
+
 log "Setting up mise..."
 
 if [ "$SHELL" != "/bin/zsh" ]; then
@@ -88,6 +97,13 @@ else
     warn "Default shell is already zsh."
 fi
 
+log "Configuring TLP for battery optimization..."
+sudo systemctl enable --now tlp
+sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
+
+log "Disabling Docker autostart (use 'don' to start when needed)..."
+sudo systemctl disable docker.service docker.socket
+
 log "Installation complete!"
 echo "-----------------------------------------------------"
 echo "Manual actions required:"
@@ -96,4 +112,11 @@ echo "2. Launch Neovim for plugins to be installed."
 echo "3. Consider adding your user to the 'docker' group to run docker without sudo:"
 echo "   sudo usermod -aG docker $USER"
 echo "   (You will need to log out and back in for this to take effect)."
+echo ""
+echo "Power Management Commands:"
+echo "  - don      : Start Docker"
+echo "  - doff     : Stop Docker (saves ~1.3W)"
+echo "  - dstatus  : Check Docker status"
+echo ""
+echo "See POWER_OPTIMIZATION.md for battery optimization details."
 echo "-----------------------------------------------------"

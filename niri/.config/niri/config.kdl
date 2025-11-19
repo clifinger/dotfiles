@@ -1,5 +1,4 @@
 output "Lenovo Group Limited 0x41B0 Unknown" {
-    off
 }
 output "Hewlett Packard HP Z27n CNK72307H3" {
     mode "2560x1440@60"
@@ -84,7 +83,6 @@ spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
 spawn-at-startup "~/.config/waybar/waybar-niri.sh"
 spawn-at-startup "dunst" "-conf" "/home/julien/niri-setup/dunst/dunstrc"
 spawn-at-startup "sh" "-c" "pkill swayidle; echo '10 minutes' > /tmp/idle-time; /home/julien/niri-setup/scripts/swayidle.sh"
-spawn-at-startup "sh" "-c" "sleep 1; discord --start-minimized &"
 spawn-at-startup "sh" "-c" "swww-daemon & swww img /home/julien/niri-setup/wallpapers/backdrop.png"
 spawn-at-startup "swaybg" "-i" "/home/julien/Pictures/Wallpapers/wallpapers/wallhaven-arch.png" "-m" "fill" "-c" "#000000"
 layer-rule {
