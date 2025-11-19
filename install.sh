@@ -77,7 +77,7 @@ else
 fi
 
 log "Symlinking dotfiles with stow..."
-(cd "$HOME/dotfiles" && stow --target="$HOME" --no-folding zsh kitty mise)
+(cd "$HOME/dotfiles" && stow --target="$HOME" --no-folding zsh kitty mise niri waybar niri-configs local)
 
 log "Installing power management scripts..."
 mkdir -p "$HOME/.local/bin"

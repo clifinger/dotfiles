@@ -1,0 +1,11 @@
+#!/bin/bash
+# Docker ON - Démarrer Docker
+
+if systemctl is-active --quiet docker; then
+    echo "✓ Docker est déjà actif"
+    docker ps
+else
+    echo "🟢 Démarrage de Docker..."
+    sudo systemctl start docker.socket docker.service
+    echo "✓ Docker activé"
+fi
