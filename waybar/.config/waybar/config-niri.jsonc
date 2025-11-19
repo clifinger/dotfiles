@@ -179,7 +179,7 @@
   "custom/power": {
     "format": "  ",
     "tooltip": false,
-    "on-click": "/home/julien/niri-configs/scripts/wlogout.sh",
+    "on-click": "/home/julien/.niri-configs/scripts/wlogout.sh",
     "justify": "center"
   },
   "bluetooth": {

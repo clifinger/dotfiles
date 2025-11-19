@@ -201,7 +201,7 @@ log "Symlinking dotfiles with stow..."
 
 # Create niri-configs symlink (not a stow package)
 log "Creating niri-configs symlink..."
-ln -sfn "$HOME/.dotfiles/niri-configs" "$HOME/niri-configs"
+ln -sfn "$HOME/.dotfiles/niri-configs" "$HOME/.niri-configs"
 
 # TLP configuration
 log "Configuring TLP for battery optimization..."
