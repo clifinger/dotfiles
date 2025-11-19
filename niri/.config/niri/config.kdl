@@ -84,7 +84,7 @@ spawn-at-startup "~/.config/waybar/waybar-niri.sh"
 spawn-at-startup "dunst" "-conf" "/home/julien/.niri-configs/dunst/dunstrc"
 spawn-at-startup "sh" "-c" "pkill swayidle; echo '10 minutes' > /tmp/idle-time; /home/julien/.niri-configs/scripts/swayidle.sh"
 spawn-at-startup "sh" "-c" "swww-daemon & swww img /home/julien/.niri-configs/wallpapers/backdrop.png"
-spawn-at-startup "swaybg" "-i" "/home/julien/Pictures/Wallpapers/wallpapers/wallhaven-arch.png" "-m" "fill" "-c" "#000000"
+spawn-at-startup "swaybg" "-i" "/home/julien/Pictures/Wallpapers/wallhaven-arch.png" "-m" "fill" "-c" "#000000"
 layer-rule {
     match namespace="^swww-daemon$"
     place-within-backdrop true
