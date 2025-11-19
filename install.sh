@@ -181,10 +181,10 @@ install_zsh_plugin "zsh-syntax-highlighting" "https://github.com/zsh-users/zsh-s
 
 # Clone dotfiles and nvim config
 log "Cloning dotfiles repository..."
-if [ ! -d "$HOME/dotfiles" ]; then
-    git clone https://github.com/clifinger/dotfiles.git "$HOME/dotfiles"
+if [ ! -d "$HOME/.dotfiles" ]; then
+    git clone https://github.com/clifinger/dotfiles.git "$HOME/.dotfiles"
 else
-    warn "~/dotfiles already exists."
+    warn "~/.dotfiles already exists."
 fi
 
 if [ ! -d "$HOME/.config/nvim" ]; then
@@ -196,16 +196,16 @@ fi
 
 # Stow dotfiles
 log "Symlinking dotfiles with stow..."
-(cd "$HOME/dotfiles" && stow --target="$HOME" --no-folding \
+(cd "$HOME/.dotfiles" && stow --target="$HOME" --no-folding \
     zsh kitty mise niri waybar local)
 
 # Create niri-configs symlink (not a stow package)
 log "Creating niri-configs symlink..."
-ln -sfn "$HOME/dotfiles/niri-configs" "$HOME/niri-configs"
+ln -sfn "$HOME/.dotfiles/niri-configs" "$HOME/niri-configs"
 
 # TLP configuration
 log "Configuring TLP for battery optimization..."
-sudo cp "$HOME/dotfiles/system/etc/tlp.conf" /etc/tlp.conf
+sudo cp "$HOME/.dotfiles/system/etc/tlp.conf" /etc/tlp.conf
 sudo systemctl enable --now tlp
 sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
 
