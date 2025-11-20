@@ -152,6 +152,14 @@ paru -S --needed --noconfirm "${APP_PACKAGES[@]}"
 # log "Installing dev tools..."
 # paru -S --needed --noconfirm "${DEV_PACKAGES[@]}"
 
+# Bitwarden CLI for keys management
+if ! command -v bw &> /dev/null; then
+    log "Installing Bitwarden CLI for keys management..."
+    npm install -g @bitwarden/cli
+else
+    warn "Bitwarden CLI is already installed."
+fi
+
 # Oh My Zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     log "Installing Oh My Zsh..."
@@ -222,6 +230,17 @@ else
     warn "Default shell is already zsh."
 fi
 
+# SSH & GPG Keys Setup
+echo ""
+log "Setting up SSH & GPG keys..."
+if [ -f "$HOME/.dotfiles/scripts/restore-keys-auto.sh" ]; then
+    chmod +x "$HOME/.dotfiles/scripts/restore-keys-auto.sh"
+    chmod +x "$HOME/.dotfiles/scripts/bitwarden-keys/"*.sh
+    "$HOME/.dotfiles/scripts/restore-keys-auto.sh"
+else
+    warn "Keys setup script not found, skipping..."
+fi
+
 echo ""
 log "Installation complete!"
 echo ""
@@ -236,6 +255,10 @@ echo "  Power Management Commands:"
 echo "    don      - Start Docker"
 echo "    doff     - Stop Docker (saves ~1.3W)"
 echo "    dstatus  - Check Docker status"
+echo ""
+echo "  Keys Management:"
+echo "    ~/.dotfiles/scripts/bitwarden-keys/backup-keys.sh"
+echo "    ~/.dotfiles/scripts/bitwarden-keys/restore-keys.sh"
 echo ""
 echo "  See POWER_OPTIMIZATION.md for battery details."
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
