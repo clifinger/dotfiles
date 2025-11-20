@@ -42,3 +42,4 @@ eval "$(mise activate zsh)"
 # bindkey "^H" backward-delete-char
 # bindkey "^?" backward-delete-char
 export PATH="$HOME/.local/bin:$PATH"
+source <(exercism completion zsh)

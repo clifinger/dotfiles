@@ -1,0 +1,6 @@
+# Auto-adjust screen brightness based on AC power state
+# 80% brightness when plugged in, 50% on battery
+# amdgpu_bl1 max_brightness: 64764
+
+SUBSYSTEM=="power_supply", ATTR{online}=="0", RUN+="/bin/sh -c 'echo 32382 > /sys/class/backlight/amdgpu_bl1/brightness'"
+SUBSYSTEM=="power_supply", ATTR{online}=="1", RUN+="/bin/sh -c 'echo 51811 > /sys/class/backlight/amdgpu_bl1/brightness'"

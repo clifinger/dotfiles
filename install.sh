@@ -238,6 +238,12 @@ sudo cp "$HOME/.dotfiles/system/etc/tlp.conf" /etc/tlp.conf
 sudo systemctl enable --now tlp
 sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
 
+# Udev rules for auto-brightness
+log "Installing udev rules for auto-brightness..."
+sudo cp "$HOME/.dotfiles/system/etc/udev/rules.d/95-brightness-on-power.rules" /etc/udev/rules.d/
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+
 # Docker optimization
 log "Disabling Docker autostart (use 'don' to start)..."
 sudo systemctl disable docker.service docker.socket
