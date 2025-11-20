@@ -128,6 +128,7 @@ if [ "$SSH_EXISTS" = "0" ] && [ "$GPG_EXISTS" = "0" ]; then
                 # Configurer Git
                 git config --global user.signingkey "$GPG_KEY_ID"
                 git config --global commit.gpgsign true
+                git config --global tag.gpgsign true
                 
                 echo ""
                 echo "📋 Ajoutez cette clé publique à GitHub:"
