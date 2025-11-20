@@ -1,131 +1,131 @@
-# ✅ Tests de Validation - Gestion des Clés
+# ✅ Validation Tests - Key Management
 
-## 🧪 Tests Effectués
+## 🧪 Tests Performed
 
-### Test 1: Dry-Run Complet ✅
+### Test 1: Full Dry-Run ✅
 **Script**: `test-keys-dry-run.sh`
 
-**Résultat**:
-- ✅ Clés locales détectées (SSH ed25519 + GPG)
-- ✅ Clés dans Bitwarden confirmées
-- ✅ Bitwarden CLI fonctionnel
-- ✅ Tous les scripts exécutables
-- ✅ Dépendances présentes (jq, gpg)
-- ✅ Lecture/export des clés réussi
+**Result**:
+- ✅ Local keys detected (SSH ed25519 + GPG)
+- ✅ Keys in Bitwarden confirmed
+- ✅ Bitwarden CLI functional
+- ✅ All scripts executable
+- ✅ Dependencies present (jq, gpg)
+- ✅ Key reading/export successful
 
-### Test 2: Protections Anti-Écrasement ✅
+### Test 2: Overwrite Protections ✅
 **Script**: `test-protections.sh`
 
-**Résultat**:
-- ✅ Confirmation avant écrasement SSH (y/N)
-- ✅ Confirmation avant écrasement GPG (y/N)
-- ✅ Défaut = NON (sécurisé)
-- ✅ Abandon si refus
-- ✅ Fichiers temporaires nettoyés (trap EXIT)
-- ✅ Permissions correctes (600/644)
+**Result**:
+- ✅ Confirmation before SSH overwrite (y/N)
+- ✅ Confirmation before GPG overwrite (y/N)
+- ✅ Default = NO (secure)
+- ✅ Abort if refused
+- ✅ Temporary files cleaned (trap EXIT)
+- ✅ Correct permissions (600/644)
 
-### Test 3: Restauration Réelle avec Refus ✅
-**Commande**: `echo "n" | restore-keys.sh`
+### Test 3: Real Restore with Refusal ✅
+**Command**: `echo "n" | restore-keys.sh`
 
-**Résultat**:
+**Result**:
 ```
-📥 Récupération des clés SSH...
-   ⚠️  Clés SSH existantes détectées:
+📥 Retrieving SSH keys...
+   ⚠️  Existing SSH keys detected:
       - id_ed25519
-   📥 Clé à restaurer: id_ed25519
+   📥 Key to restore: id_ed25519
 
-   ⏭️  Restauration SSH annulée
+   ⏭️  SSH restoration cancelled
 ```
 
-**Vérification**:
-- ✅ Clés SSH inchangées (checksums MD5 identiques)
-- ✅ Aucun fichier créé ou modifié
-- ✅ Protection fonctionnelle
+**Verification**:
+- ✅ SSH keys unchanged (identical MD5 checksums)
+- ✅ No files created or modified
+- ✅ Protection functional
 
-### Test 4: Format de Sauvegarde Bitwarden ✅
+### Test 4: Bitwarden Backup Format ✅
 
-**Avant correction**:
-- ❌ `\n` littéraux (pas de vrais retours à la ligne)
+**Before fix**:
+- ❌ Literal `\n` (no real newlines)
 - ❌ Parsing impossible
 
-**Après correction** (utilisation de `printf`):
-- ✅ Vrais retours à la ligne
-- ✅ `grep -c "^-----BEGIN"` retourne 1
-- ✅ Détection correcte du type de clé (ed25519/rsa)
+**After fix** (using `printf`):
+- ✅ Real newlines
+- ✅ `grep -c "^-----BEGIN"` returns 1
+- ✅ Correct key type detection (ed25519/rsa)
 
-## 📊 Résumé des Protections
+## 📊 Summary of Protections
 
 | Protection | Status | Description |
 |-----------|--------|-------------|
-| Détection clés existantes | ✅ | Détecte ed25519, rsa, ecdsa |
-| Confirmation utilisateur | ✅ | Demande y/N avant écrasement |
-| Défaut sécurisé | ✅ | N = refus (pas d'écrasement) |
-| Fichiers temporaires | ✅ | Nettoyage automatique (trap EXIT) |
-| Permissions | ✅ | 600 (privées), 644 (publiques) |
-| Format Bitwarden | ✅ | Vrais retours à la ligne |
-| Type de clé | ✅ | Détection automatique |
+| Existing keys detection | ✅ | Detects ed25519, rsa, ecdsa |
+| User confirmation | ✅ | Asks y/N before overwrite |
+| Secure default | ✅ | N = refusal (no overwrite) |
+| Temporary files | ✅ | Automatic cleanup (trap EXIT) |
+| Permissions | ✅ | 600 (private), 644 (public) |
+| Bitwarden format | ✅ | Real newlines |
+| Key type | ✅ | Automatic detection |
 
-## 🎯 Scénarios Testés
+## 🎯 Tested Scenarios
 
-### ✅ Scénario 1: Clé existe, refus
-- Détection: ✅
-- Demande confirmation: ✅
-- Refus respecté: ✅
-- Fichier intact: ✅
+### ✅ Scenario 1: Key exists, refusal
+- Detection: ✅
+- Confirmation request: ✅
+- Refusal respected: ✅
+- File intact: ✅
 
-### ✅ Scénario 2: Format Bitwarden
-- Sauvegarde: ✅
-- Vrais `\n`: ✅
+### ✅ Scenario 2: Bitwarden Format
+- Backup: ✅
+- Real `\n`: ✅
 - Parsing: ✅
-- Restauration: ✅
+- Restore: ✅
 
-### ✅ Scénario 3: Sécurité
+### ✅ Scenario 3: Security
 - mktemp: ✅
 - chmod 700: ✅
 - trap EXIT: ✅
-- Verrouillage BW: ✅
+- BW locking: ✅
 
-## 🔐 Checksums de Vérification
+## 🔐 Verification Checksums
 
-**Avant tous les tests**:
+**Before all tests**:
 ```
 1e5c44e351177caf2d6ac3419c2b2e60  ~/.ssh/id_ed25519
 46e1b4013c80f935571ec7a29fcd0bc7  ~/.ssh/id_ed25519.pub
 ```
 
-**Après tous les tests**:
+**After all tests**:
 ```
 1e5c44e351177caf2d6ac3419c2b2e60  ~/.ssh/id_ed25519
 46e1b4013c80f935571ec7a29fcd0bc7  ~/.ssh/id_ed25519.pub
 ```
 
-**✅ IDENTIQUES - Aucune modification accidentelle**
+**✅ IDENTICAL - No accidental modification**
 
-## 🚀 Commandes de Test
+## 🚀 Test Commands
 
 ```bash
-# Test complet sans risque
+# Full test without risk
 ~/.dotfiles/scripts/test-keys-dry-run.sh
 
-# Vérifier les protections
+# Verify protections
 ~/.dotfiles/scripts/test-protections.sh
 
-# Test réel avec refus (sûr)
+# Real test with refusal (safe)
 export BW_SESSION="..."
 echo "n" | ~/.dotfiles/scripts/bitwarden-keys/restore-keys.sh
 ```
 
 ## ✅ Conclusion
 
-**Tous les tests réussis !**
+**All tests passed!**
 
-Le système de gestion des clés est:
-- ✅ **Sûr**: Pas d'écrasement accidentel
-- ✅ **Testé**: Avec de vraies clés, sans risque
-- ✅ **Fonctionnel**: Sauvegarde et restauration OK
-- ✅ **Sécurisé**: Fichiers temporaires nettoyés
+The key management system is:
+- ✅ **Safe**: No accidental overwrite
+- ✅ **Tested**: With real keys, without risk
+- ✅ **Functional**: Backup and restore OK
+- ✅ **Secure**: Temporary files cleaned
 
 ---
 
-*Tests effectués le 2025-11-20*
-*Environnement: Arch Linux, Bitwarden CLI 2025.11.0*
+*Tests performed on 2025-11-20*
+*Environment: Arch Linux, Bitwarden CLI 2025.11.0*

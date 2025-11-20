@@ -1,6 +1,6 @@
 # System Configuration Files
 
-Ces fichiers nécessitent des privilèges root et ne peuvent pas être gérés par stow.
+These files require root privileges and cannot be managed by stow.
 
 ## Installation
 
@@ -10,15 +10,15 @@ sudo cp system/etc/tlp.conf /etc/tlp.conf
 sudo tlp start
 ```
 
-## Fichiers inclus
+## Included Files
 
-- `etc/tlp.conf` - Configuration TLP optimisée pour batterie
-  - CPU EPP: power (sur batterie)
-  - Platform Profile: low-power (sur batterie)
+- `etc/tlp.conf` - TLP configuration optimized for battery
+  - CPU EPP: power (on battery)
+  - Platform Profile: low-power (on battery)
   - SATA link power management
-  - Runtime PM activé
-  - USB autosuspend activé
+  - Runtime PM enabled
+  - USB autosuspend enabled
 
 ## Notes
 
-Ces optimisations sont automatiquement appliquées par `install.sh`.
+These optimizations are automatically applied by `install.sh`.

@@ -2,10 +2,10 @@
 # See: https://mise.jdx.dev/lang/node.html#default-node-packages
 
 # GitHub Copilot CLI
-@githubnext/github-copilot-cli
+@github/copilot
 
 # Google Gemini CLI
-@google/generative-ai
+https://github.com/google-gemini/gemini-cli
 
 # Bitwarden CLI (for keys management)
 @bitwarden/cli

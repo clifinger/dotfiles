@@ -1,17 +1,17 @@
-# 🔐 Gestion des clés SSH et GPG avec Bitwarden
+# 🔐 SSH and GPG Key Management with Bitwarden
 
-Scripts pour sauvegarder et restaurer vos clés SSH et GPG de manière sécurisée via Bitwarden.
+Scripts to securely backup and restore your SSH and GPG keys via Bitwarden.
 
-## 📋 Prérequis
+## 📋 Prerequisites
 
-- **Bitwarden CLI** : Installé automatiquement via npm
-- **jq** : Pour parser JSON
-- **gpg** : Pour les clés GPG
-- Compte Bitwarden actif
+- **Bitwarden CLI**: Automatically installed via npm
+- **jq**: For JSON parsing
+- **gpg**: For GPG keys
+- Active Bitwarden account
 
-## 🚀 Utilisation
+## 🚀 Usage
 
-### 1️⃣ Première sauvegarde (machine actuelle)
+### 1️⃣ First Backup (Current Machine)
 
 ```bash
 cd ~/Scripts/bitwarden-keys
@@ -19,15 +19,15 @@ chmod +x backup-keys.sh
 ./backup-keys.sh
 ```
 
-Ce script va :
-- Se connecter à Bitwarden (vous demandera vos identifiants)
-- Déverrouiller votre coffre-fort
-- Exporter vos clés SSH (~/.ssh/id_ed25519 ou id_rsa)
-- Exporter vos clés GPG
-- Créer des notes sécurisées dans Bitwarden
-- Synchroniser avec le cloud
+This script will:
+- Connect to Bitwarden (will ask for credentials)
+- Unlock your vault
+- Export your SSH keys (~/.ssh/id_ed25519 or id_rsa)
+- Export your GPG keys
+- Create secure notes in Bitwarden
+- Sync with the cloud
 
-### 2️⃣ Restauration (nouvelle machine)
+### 2️⃣ Restore (New Machine)
 
 ```bash
 cd ~/Scripts/bitwarden-keys
@@ -35,64 +35,64 @@ chmod +x restore-keys.sh
 ./restore-keys.sh
 ```
 
-Ce script va :
-- Se connecter à Bitwarden
-- Récupérer vos clés depuis le cloud
-- Restaurer vos clés SSH dans ~/.ssh/
-- Restaurer vos clés GPG
-- Configurer les permissions correctes
+This script will:
+- Connect to Bitwarden
+- Retrieve your keys from the cloud
+- Restore your SSH keys to ~/.ssh/
+- Restore your GPG keys
+- Configure correct permissions
 
-## 🔒 Sécurité
+## 🔒 Security
 
-✅ **Ce qui est sécurisé** :
-- Les clés sont chiffrées par Bitwarden avec votre mot de passe maître
-- Stockage dans votre coffre-fort personnel
-- Synchronisation chiffrée de bout en bout
-- Suppression automatique des fichiers temporaires
+✅ **What is secure**:
+- Keys are encrypted by Bitwarden with your master password
+- Stored in your personal vault
+- End-to-end encrypted synchronization
+- Automatic deletion of temporary files
 
-⚠️ **Bonnes pratiques** :
-- Utilisez un **mot de passe maître fort** pour Bitwarden
-- Activez l'**authentification à deux facteurs** (2FA) sur Bitwarden
-- Ne partagez jamais votre session Bitwarden
-- Verrouillez Bitwarden quand vous ne l'utilisez pas
+⚠️ **Best Practices**:
+- Use a **strong master password** for Bitwarden
+- Enable **Two-Factor Authentication** (2FA) on Bitwarden
+- Never share your Bitwarden session
+- Lock Bitwarden when not in use
 
-## 📦 Structure des notes Bitwarden
+## 📦 Bitwarden Notes Structure
 
-Les scripts créent ces notes sécurisées :
+The scripts create these secure notes:
 
-- **SSH Keys Backup** : Contient clé privée + publique SSH
-- **GPG Key [KEY_ID]** : Une note par clé GPG avec privée + publique + confiance
+- **SSH Keys Backup**: Contains private + public SSH key
+- **GPG Key [KEY_ID]**: One note per GPG key with private + public + trust
 
-## 🛠️ Commandes utiles
+## 🛠️ Useful Commands
 
 ```bash
-# Connexion à Bitwarden CLI
+# Login to Bitwarden CLI
 bw login
 
-# Déverrouiller le coffre
+# Unlock the vault
 bw unlock
 
-# Lister vos notes
+# List your notes
 bw list items --search "Keys"
 
-# Se déconnecter
+# Logout
 bw lock
 ```
 
-## 🔄 Workflow recommandé
+## 🔄 Recommended Workflow
 
-1. **Machine principale** → Exécutez `backup-keys.sh` régulièrement
-2. **Nouvelle machine** → Exécutez `restore-keys.sh`
-3. **Après changement** → Re-exécutez `backup-keys.sh`
+1. **Main Machine** → Run `backup-keys.sh` regularly
+2. **New Machine** → Run `restore-keys.sh`
+3. **After Change** → Re-run `backup-keys.sh`
 
-## ❓ Dépannage
+## ❓ Troubleshooting
 
-**Erreur "bw not found"**
+**Error "bw not found"**
 ```bash
 npm install -g @bitwarden/cli
 ```
 
-**Erreur "jq not found"**
+**Error "jq not found"**
 ```bash
 # Arch Linux
 sudo pacman -S jq
@@ -101,17 +101,17 @@ sudo pacman -S jq
 sudo apt install jq
 ```
 
-**Session expirée**
+**Session Expired**
 ```bash
 export BW_SESSION=$(bw unlock --raw)
 ```
 
-## 📚 Ressources
+## 📚 Resources
 
-- [Documentation Bitwarden CLI](https://bitwarden.com/help/cli/)
-- [Guide SSH GitHub](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)
-- [Guide GPG GitHub](https://docs.github.com/en/authentication/managing-commit-signature-verification)
+- [Bitwarden CLI Documentation](https://bitwarden.com/help/cli/)
+- [GitHub SSH Guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)
+- [GitHub GPG Guide](https://docs.github.com/en/authentication/managing-commit-signature-verification)
 
 ---
 
-**⚠️ IMPORTANT** : Ne committez JAMAIS ces scripts dans un repo public avec vos clés dedans !
+**⚠️ IMPORTANT**: NEVER commit these scripts to a public repo with your keys inside!
