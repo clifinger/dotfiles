@@ -68,19 +68,21 @@ if [ -f "$TEMP_DIR/ssh_private_key" ]; then
     SSH_PRIVATE=$(cat "$TEMP_DIR/ssh_private_key")
     SSH_PUBLIC=$(cat "$TEMP_DIR/ssh_public_key")
     
+    # Créer le contenu avec de vrais retours à la ligne
+    SSH_NOTES=$(printf "Private Key:\n%s\n\nPublic Key:\n%s" "$SSH_PRIVATE" "$SSH_PUBLIC")
+    
     # Vérifier si la note existe déjà
     EXISTING_ITEM=$(bw list items --search "SSH Keys Backup" 2>/dev/null | jq -r '.[0].id // empty')
     
     if [ -n "$EXISTING_ITEM" ]; then
         echo "   Mise à jour de la note SSH existante..."
-        bw get item "$EXISTING_ITEM" | jq --arg priv "$SSH_PRIVATE" --arg pub "$SSH_PUBLIC" \
-            '.notes = "Private Key:\n" + $priv + "\n\nPublic Key:\n" + $pub' | \
+        bw get item "$EXISTING_ITEM" | jq --arg notes "$SSH_NOTES" '.notes = $notes' | \
             bw encode | bw edit item "$EXISTING_ITEM" > /dev/null
     else
         echo "   Création d'une nouvelle note SSH..."
         bw get template item | jq \
             --arg name "SSH Keys Backup" \
-            --arg notes "Private Key:\n${SSH_PRIVATE}\n\nPublic Key:\n${SSH_PUBLIC}" \
+            --arg notes "$SSH_NOTES" \
             '.type = 2 | .secureNote.type = 0 | .name = $name | .notes = $notes' | \
             bw encode | bw create item > /dev/null
     fi
@@ -97,16 +99,18 @@ for GPG_FILE in "$TEMP_DIR"/gpg_private_*.asc; do
         
         EXISTING_GPG=$(bw list items --search "GPG Key $KEY_ID" 2>/dev/null | jq -r '.[0].id // empty')
         
+        # Créer le contenu avec de vrais retours à la ligne
+        GPG_NOTES=$(printf "Private Key:\n%s\n\nPublic Key:\n%s\n\nOwnertrust:\n%s" "$GPG_PRIVATE" "$GPG_PUBLIC" "$OWNERTRUST")
+        
         if [ -n "$EXISTING_GPG" ]; then
             echo "   Mise à jour de la clé GPG $KEY_ID..."
-            bw get item "$EXISTING_GPG" | jq --arg priv "$GPG_PRIVATE" --arg pub "$GPG_PUBLIC" --arg trust "$OWNERTRUST" \
-                '.notes = "Private Key:\n" + $priv + "\n\nPublic Key:\n" + $pub + "\n\nOwnertrust:\n" + $trust' | \
+            bw get item "$EXISTING_GPG" | jq --arg notes "$GPG_NOTES" '.notes = $notes' | \
                 bw encode | bw edit item "$EXISTING_GPG" > /dev/null
         else
             echo "   Création d'une nouvelle note GPG $KEY_ID..."
             bw get template item | jq \
                 --arg name "GPG Key $KEY_ID" \
-                --arg notes "Private Key:\n${GPG_PRIVATE}\n\nPublic Key:\n${GPG_PUBLIC}\n\nOwnertrust:\n${OWNERTRUST}" \
+                --arg notes "$GPG_NOTES" \
                 '.type = 2 | .secureNote.type = 0 | .name = $name | .notes = $notes' | \
                 bw encode | bw create item > /dev/null
         fi

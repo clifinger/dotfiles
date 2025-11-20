@@ -54,19 +54,32 @@ if [ -n "$SSH_ITEM" ]; then
     mkdir -p ~/.ssh
     chmod 700 ~/.ssh
     
-    # Détecter le type de clé
+    # Détecter le type de clé depuis le fichier temporaire
     if grep -q "BEGIN OPENSSH PRIVATE KEY" "$TEMP_DIR/ssh_private_key"; then
+        KEY_TYPE="ed25519"
         KEY_FILE="$HOME/.ssh/id_ed25519"
     else
+        KEY_TYPE="rsa"
         KEY_FILE="$HOME/.ssh/id_rsa"
     fi
     
-    # Demander confirmation si la clé existe déjà
-    if [ -f "$KEY_FILE" ]; then
-        read -p "   ⚠️  Une clé SSH existe déjà. Écraser? (y/N) " -n 1 -r
+    # Vérifier si une clé SSH existe déjà (n'importe quel type)
+    SSH_EXISTS=false
+    if [ -f "$HOME/.ssh/id_ed25519" ] || [ -f "$HOME/.ssh/id_rsa" ] || [ -f "$HOME/.ssh/id_ecdsa" ]; then
+        SSH_EXISTS=true
+        
+        # Afficher quelles clés existent
+        echo "   ⚠️  Clés SSH existantes détectées:"
+        [ -f "$HOME/.ssh/id_ed25519" ] && echo "      - id_ed25519"
+        [ -f "$HOME/.ssh/id_rsa" ] && echo "      - id_rsa"
+        [ -f "$HOME/.ssh/id_ecdsa" ] && echo "      - id_ecdsa"
+        echo "   📥 Clé à restaurer: id_${KEY_TYPE}"
+        echo ""
+        
+        read -p "   Écraser les clés existantes? (y/N) " -n 1 -r
         echo
         if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-            echo "   ⏭️  Clés SSH ignorées"
+            echo "   ⏭️  Restauration SSH annulée"
             SSH_ITEM=""
         fi
     fi
