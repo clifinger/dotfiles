@@ -165,6 +165,22 @@ else
     warn "Bitwarden CLI is already installed."
 fi
 
+# Setup mise and install default node packages
+log "Setting up mise and default node packages..."
+if command -v mise &> /dev/null; then
+    # Create symlink for .default-npm-packages
+    ln -sf "$HOME/.dotfiles/local/.default-npm-packages" "$HOME/.default-npm-packages"
+    
+    # Install latest node with mise (will auto-install npm packages)
+    mise use -g node@latest
+    mise install
+    
+    log "✓ mise configured with node@latest"
+    log "✓ Default npm packages will be auto-installed"
+else
+    warn "mise not found, skipping node setup"
+fi
+
 # Oh My Zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     log "Installing Oh My Zsh..."

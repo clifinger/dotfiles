@@ -1,0 +1,16 @@
+# Auto-installed npm packages with mise/node
+# See: https://mise.jdx.dev/lang/node.html#default-node-packages
+
+# GitHub Copilot CLI
+@githubnext/github-copilot-cli
+
+# Google Gemini CLI
+@google/generative-ai
+
+# Bitwarden CLI (for keys management)
+@bitwarden/cli
+
+# Other useful tools
+typescript
+prettier
+eslint
