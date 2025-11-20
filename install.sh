@@ -197,7 +197,7 @@ fi
 # Stow dotfiles
 log "Symlinking dotfiles with stow..."
 (cd "$HOME/.dotfiles" && stow --target="$HOME" --no-folding \
-    zsh kitty mise niri waybar local)
+    zsh kitty mise niri waybar local gtk-3.0)
 
 # Create niri-configs symlink (not a stow package)
 log "Creating niri-configs symlink..."
