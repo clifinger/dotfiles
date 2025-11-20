@@ -47,6 +47,11 @@ CORE_PACKAGES=(
     tlp tlp-rdw         # Power management
     brightnessctl       # Brightness control
     udiskie             # USB automount
+    
+    # Security & Passwords
+    gnome-keyring       # Keyring daemon
+    seahorse            # Keyring GUI (trousseau)
+    libsecret           # Secret storage
 )
 
 # Wayland/Niri WM packages

@@ -135,6 +135,16 @@ if [ -n "$GPG_ITEMS" ]; then
         fi
         
         echo "      ✓ Clé GPG $KEY_ID restaurée"
+        
+        # Configurer Git pour signer automatiquement si pas déjà configuré
+        CURRENT_KEY=$(git config --global user.signingkey 2>/dev/null || echo "")
+        if [ -z "$CURRENT_KEY" ]; then
+            echo "      🔧 Configuration de Git pour signer les commits..."
+            git config --global user.signingkey "$KEY_ID"
+            git config --global commit.gpgsign true
+            git config --global tag.gpgsign true
+            echo "      ✓ Git configuré avec la clé GPG"
+        fi
     done
     echo "   ✓ Toutes les clés GPG restaurées"
 else

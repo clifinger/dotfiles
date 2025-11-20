@@ -159,6 +159,9 @@ binds {
     Mod+E {
         spawn "nautilus"
     }
+    Mod+K {
+        spawn "seahorse"
+    }
     Mod+L {
         spawn "/home/julien/.niri-configs/scripts/swaylock.sh"
     }
