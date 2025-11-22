@@ -34,7 +34,8 @@ input {
 }
 layout {
     gaps 14
-    center-focused-column "always"
+    center-focused-column "never"
+    always-center-single-column
     preset-column-widths {
         proportion 0.33333
         proportion 0.5
@@ -73,8 +74,6 @@ layout {
     }
     background-color "transparent"
 }
-spawn-at-startup "firefox"
-spawn-at-startup "kitty"
 spawn-at-startup "udiskie"
 spawn-at-startup "niriswitcher"
 spawn-at-startup "xwayland-satellite"
@@ -98,15 +97,6 @@ window-rule {
         proportion 1.0
     }
     open-focused true
-}
-window-rule {
-    match app-id="kitty" at-startup=true
-    open-on-output "Xiaomi Corporation Mi Monitor 6638000002298"
-}
-window-rule {
-    match app-id="firefox" at-startup=true
-    open-focused false
-    open-on-output "Hewlett Packard HP Z27n CNK72307H3"
 }
 window-rule {
     match app-id="org.gnome.Calculator"
@@ -148,10 +138,10 @@ binds {
         spawn "fuzzel" "--config" "/home/julien/.niri-configs/fuzzel/fuzzel.ini"
     }
     Mod+Shift+Return {
-        spawn "firefox"
+        spawn "chromium"
     }
     Mod+B {
-        spawn "firefox"
+        spawn "chromium" "--new-window" "https://mail.google.com/mail/u/0/#inbox"
     }
     Mod+Z {
         spawn "anytype"
@@ -219,7 +209,7 @@ binds {
     Mod+F2 {
         move-column-to-monitor-right
     }
-    Mod+Q {
+    Mod+Shift+Q {
         close-window
     }
     Mod+W {
