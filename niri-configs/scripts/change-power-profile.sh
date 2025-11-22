@@ -1,5 +1,5 @@
 #!/bin/bash
-# Changement de profil power via platform_profile (compatible TLP)
+# Changement de profil power via TLP
 
 # Récupérer le profil actuel
 current_profile=$(cat /sys/firmware/acpi/platform_profile 2>/dev/null | tr -d '\n' || echo "balanced")
@@ -16,8 +16,17 @@ done
 choice=$(echo -e "$sorted_list" | fuzzel --dmenu --lines 3 -w 20 --config /home/julien/.niri-configs/fuzzel/power-profile.ini)
 
 if [ ! -z "$choice" ]; then
-  echo "$choice" | sudo tee /sys/firmware/acpi/platform_profile > /dev/null
-  notify-send "Power Profile" "Profil changé: $choice" -i battery
+  # Changer le profil via TLP
+  case "$choice" in
+    "low-power")
+      sudo tlp bat
+      ;;
+    "balanced"|"performance")
+      sudo tlp ac
+      ;;
+  esac
+  
+  notify-send "Power Profile" "Profil changé: $choice (TLP)" -i battery
   
   # Afficher la consommation actuelle
   power_now=$(cat /sys/class/power_supply/BAT*/power_now 2>/dev/null)
