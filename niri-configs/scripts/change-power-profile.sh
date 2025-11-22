@@ -1,8 +1,19 @@
 #!/bin/bash
 # Changement de profil power via platform_profile (compatible TLP)
 
-options="low-power\nbalanced\nperformance"
-choice=$(echo -e "$options" | fuzzel --dmenu --lines 3 -w 20 --config /home/julien/niri-setup/fuzzel/power-profile.ini)
+# Récupérer le profil actuel
+current_profile=$(cat /sys/firmware/acpi/platform_profile 2>/dev/null | tr -d '\n' || echo "balanced")
+
+# Créer la liste avec le profil actuel en premier
+all_profiles=("low-power" "balanced" "performance")
+sorted_list="$current_profile"
+for profile in "${all_profiles[@]}"; do
+  if [ "$profile" != "$current_profile" ]; then
+    sorted_list="$sorted_list\n$profile"
+  fi
+done
+
+choice=$(echo -e "$sorted_list" | fuzzel --dmenu --lines 3 -w 20 --config /home/julien/.niri-configs/fuzzel/power-profile.ini)
 
 if [ ! -z "$choice" ]; then
   echo "$choice" | sudo tee /sys/firmware/acpi/platform_profile > /dev/null
