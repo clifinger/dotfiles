@@ -75,7 +75,8 @@ WM_PACKAGES=(
 FONT_PACKAGES=(
   ttf-jetbrains-mono-nerd
   ttf-meslo-nerd
-  ttf-maple-nerd
+  maplemono-ttf
+  maplemono-nf-unhinted
   noto-fonts
   noto-fonts-cjk
   noto-fonts-emoji
