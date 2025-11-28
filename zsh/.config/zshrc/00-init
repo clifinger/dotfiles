@@ -6,6 +6,6 @@
 # Exports
 # -----------------------------------------------------
 export EDITOR=nvim
-export PATH=$PATH:~/.cargo/bin/
+export PATH=$PATH:~/.cargo/bin/:~/.ghcup/bin/
 autoload -Uz compinit
 compinit -D

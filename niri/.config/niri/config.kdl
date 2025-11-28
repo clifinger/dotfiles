@@ -209,7 +209,7 @@ binds {
     Mod+F2 {
         move-column-to-monitor-right
     }
-    Mod+Shift+Q {
+    Mod+Q {
         close-window
     }
     Mod+W {
