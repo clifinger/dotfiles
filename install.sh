@@ -237,9 +237,10 @@ sudo cp "$HOME/.dotfiles/system/etc/tlp.conf" /etc/tlp.conf
 sudo systemctl enable --now tlp
 sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
 
-# Udev rules for auto-brightness
-log "Installing udev rules for auto-brightness..."
+# Udev rules for auto-brightness and MCHOSE devices
+log "Installing udev rules for auto-brightness and MCHOSE devices..."
 sudo cp "$HOME/.dotfiles/system/etc/udev/rules.d/95-brightness-on-power.rules" /etc/udev/rules.d/
+sudo cp "$HOME/.dotfiles/system/etc/udev/rules.d/99-mchose.rules" /etc/udev/rules.d/
 sudo udevadm control --reload-rules
 sudo udevadm trigger
 
