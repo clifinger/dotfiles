@@ -33,7 +33,7 @@ input {
     focus-follows-mouse max-scroll-amount="90%"
 }
 layout {
-    gaps 14
+    gaps 8
     center-focused-column "never"
     always-center-single-column
     preset-column-widths {
@@ -59,12 +59,13 @@ layout {
         proportion 0.99999
     }
     focus-ring {
-        width 2
-        active-color "#FFFFFF"
-        inactive-color "#6e6a86"
+        width 4
+        active-color "#CCCCCC"
+        inactive-color "#ccc"
     }
     border {
-        off
+      width 2
+      active-color "#000000"
     }
     struts {
         left 0
@@ -209,7 +210,10 @@ binds {
     Mod+F2 {
         move-column-to-monitor-right
     }
-    Mod+Q {
+    // Mod+Q {
+    //     close-window
+    // }
+    Mod+MouseMiddle {
         close-window
     }
     Mod+W {
