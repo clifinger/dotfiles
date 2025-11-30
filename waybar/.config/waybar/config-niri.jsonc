@@ -3,9 +3,9 @@
   "position": "top",
   "margin-top": 0,
   "margin-bottom": 0,
-  "margin-left": 10,
-  "margin-right": 10,
-  "spacing": 8, // Gaps between modules (8px)
+  "margin-left": 0,
+  "margin-right": 0,
+  "spacing": 4, // Gaps between modules (4px)
   "height": 38,
   "modules-left": [
     "clock#date",

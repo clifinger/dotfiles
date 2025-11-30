@@ -21,13 +21,20 @@
 #waybar {
 	background: linear-gradient(135deg, rgba(26, 15, 46, 0.95) 0%, rgba(45, 27, 78, 0.95) 50%, rgba(26, 15, 46, 0.95) 100%);
 	color: #E0B0FF;
-	border-radius: 6px;
-	margin: 4px 8px;
+	border-radius: 0px;
+	margin: 0;
 	padding: 4px 4px;
 	border: 1px solid rgba(157, 78, 221, 0.5);
 }
 
+/* Edge padding for modules */
+.modules-left {
+	margin-left: 9px;
+}
 
+.modules-right {
+	margin-right: 9px;
+}
 
 /* Each module */
 #clock,
