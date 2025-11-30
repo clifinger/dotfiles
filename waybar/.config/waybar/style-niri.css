@@ -19,13 +19,19 @@
 
 /* The whole bar */
 #waybar {
-	background-color: rgba(35, 33, 54, 0.7);
-	color: #cccccc;
-	transition-property: background-color;
-	transition-duration: 0.5s;
-	border-radius: 6px;
-	margin: 0;
+	background: linear-gradient(135deg, rgba(26, 15, 46, 0.92) 0%, rgba(45, 27, 78, 0.92) 50%, rgba(26, 15, 46, 0.92) 100%);
+	color: #E0B0FF;
+	border-radius: 12px;
+	margin: 4px 8px;
+	border: 2px solid transparent;
+	background-clip: padding-box;
+	box-shadow: 
+		0 0 20px rgba(157, 78, 221, 0.5),
+		0 0 40px rgba(0, 217, 255, 0.3),
+		inset 0 1px 0 rgba(224, 64, 251, 0.4);
 }
+
+
 
 /* Each module */
 #clock,
@@ -44,14 +50,39 @@
 #battery,
 #network,
 #custom-power {
-	margin: 0;
-	padding: 0 10px;
-	color: #cccccc;
-	background-color: #2a273f;
-	border: 1px;
-	border-style: solid;
-	border-color: #cccccc;
-	border-radius: 7px;
+	margin: 2px 3px;
+	padding: 4px 12px;
+	color: #E0B0FF;
+	background: linear-gradient(145deg, rgba(61, 32, 102, 0.8) 0%, rgba(45, 27, 78, 0.9) 100%);
+	border: 1px solid rgba(157, 78, 221, 0.5);
+	border-radius: 8px;
+	transition: all 0.3s ease;
+	box-shadow: 
+		0 0 8px rgba(157, 78, 221, 0.3),
+		inset 0 1px 0 rgba(224, 64, 251, 0.2);
+}
+
+#clock:hover,
+#bluetooth:hover,
+#language:hover,
+#wireplumber:hover,
+#cpu:hover,
+#memory:hover,
+#custom-gpu:hover,
+#custom-storage:hover,
+#custom-storage2:hover,
+#temperature:hover,
+#backlight:hover,
+#battery:hover,
+#network:hover,
+#custom-power:hover {
+	background: linear-gradient(145deg, rgba(157, 78, 221, 0.6) 0%, rgba(0, 217, 255, 0.3) 100%);
+	border-color: #00D9FF;
+	box-shadow: 
+		0 0 15px rgba(0, 217, 255, 0.5),
+		0 0 25px rgba(157, 78, 221, 0.4),
+		inset 0 1px 0 rgba(224, 64, 251, 0.4);
+	color: #FFFFFF;
 }
 
 #tray {
@@ -69,56 +100,62 @@
 }
 
 #workspaces {
-	padding: 0 5px;
+	padding: 2px 6px;
 }
 
 #workspaces button {
-	padding: 0 5px;
-	margin: 0;
-	color: lightslategrey;
-	background-color: transparent;
-	/* Use box-shadow instead of border so the text isn't offset */
-	box-shadow: inset 0 -3px transparent;
-	/* Avoid rounded borders under each workspace name */
+	padding: 2px 8px;
+	margin: 0 2px;
+	color: #8B7DA8;
+	background: transparent;
 	border: none;
-	border-radius: 0;
+	border-radius: 6px;
+	transition: all 0.3s ease;
 }
 
 #workspaces button.active,
 #workspaces button.focused {
-	color: #ffffff;
-	background-color: transparent;
+	color: #00E5FF;
+	background: linear-gradient(135deg, rgba(157, 78, 221, 0.5) 0%, rgba(0, 217, 255, 0.3) 100%);
+	box-shadow: 
+		0 0 10px rgba(0, 229, 255, 0.5),
+		inset 0 0 5px rgba(157, 78, 221, 0.3);
+	text-shadow: 0 0 10px rgba(0, 229, 255, 0.8);
 }
 
-/* Fix predefined gtk background effect on hover  */
 #workspaces button:hover {
-	background: none;
-	/* Uncomment to also disable text highlighting */
-	/* text-shadow: none; */
+	background: linear-gradient(135deg, rgba(157, 78, 221, 0.3) 0%, rgba(0, 217, 255, 0.2) 100%);
+	color: #E0B0FF;
 }
 
 #workspaces button.urgent,
 #temperature.critical {
-	color: #eb6f92;
+	color: #FF006E;
+	background: linear-gradient(135deg, rgba(255, 0, 110, 0.3) 0%, rgba(224, 64, 251, 0.2) 100%);
+	animation: urgent-pulse 1s ease-in-out infinite;
+}
+
+@keyframes urgent-pulse {
+	from { box-shadow: 0 0 5px rgba(255, 0, 110, 0.5); }
+	to { box-shadow: 0 0 15px rgba(255, 0, 110, 0.8); }
 }
 
 #battery {
-	color: #e0def4;
+	color: #E0B0FF;
 }
 
 #battery.charging,
 #battery.full,
 #battery.plugged {
-	color: darkcyan;
+	color: #00E5FF;
+	background: linear-gradient(145deg, rgba(0, 229, 255, 0.2) 0%, rgba(61, 32, 102, 0.8) 100%);
+	box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
 }
 
 #battery.critical:not(.charging) {
-	color: #f53c3c;
-	animation-name: blink;
-	animation-duration: 0.5s;
-	animation-timing-function: linear;
-	animation-iteration-count: infinite;
-	animation-direction: alternate;
+	color: #FF006E;
+	background: linear-gradient(145deg, rgba(255, 0, 110, 0.3) 0%, rgba(61, 32, 102, 0.8) 100%);
+	box-shadow: 0 0 15px rgba(255, 0, 110, 0.6);
 }
 
 #custom-power-menu {
@@ -131,9 +168,21 @@ label:focus {
 	background-color: #000000;
 }
 
-@keyframes blink {
-	to {
-		background-color: rgba(30, 34, 42, 0.5);
-		color: #abb2bf;
-	}
+/* Special styling for clock */
+#clock {
+	font-weight: 800;
+	background: linear-gradient(145deg, rgba(157, 78, 221, 0.4) 0%, rgba(0, 217, 255, 0.2) 100%);
+	border: 1px solid rgba(0, 229, 255, 0.5);
+	color: #00E5FF;
+	text-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
+}
+
+/* Network connected state */
+#network.wifi,
+#network.ethernet {
+	color: #00E5FF;
+}
+
+#network.disconnected {
+	color: #FF006E;
 }

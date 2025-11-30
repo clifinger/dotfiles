@@ -86,7 +86,6 @@ FONT_PACKAGES=(
 
 # Applications
 APP_PACKAGES=(
-  firefox           # Browser
   anytype-bin       # Notes (AUR)
   discord           # Chat
   youtube-music-bin # Music (AUR)

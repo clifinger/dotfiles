@@ -35,7 +35,7 @@ input {
 layout {
     gaps 8
     center-focused-column "never"
-    always-center-single-column
+    // always-center-single-column
     preset-column-widths {
         proportion 0.33333
         proportion 0.5
@@ -54,18 +54,19 @@ layout {
         length total-proportion=1.0
         position "top"
         place-within-column
+        active-gradient from="#E040FB" to="#00E5FF" angle=90 in="oklch longer hue"
+        inactive-gradient from="#3D2066" to="#2D1B4E" angle=90
     }
     default-column-width {
         proportion 0.99999
     }
     focus-ring {
         width 4
-        active-color "#CCCCCC"
-        inactive-color "#ccc"
+        active-gradient from="#9D4EDD" to="#00D9FF" angle=45 relative-to="workspace-view" in="oklch longer hue"
+        inactive-gradient from="#2D1B4E" to="#1A0F2E" angle=45
     }
     border {
-      width 2
-      active-color "#000000"
+      off
     }
     struts {
         left 0
@@ -84,7 +85,7 @@ spawn-at-startup "~/.config/waybar/waybar-niri.sh"
 spawn-at-startup "dunst" "-conf" "/home/julien/.niri-configs/dunst/dunstrc"
 spawn-at-startup "sh" "-c" "pkill swayidle; echo '10 minutes' > /tmp/idle-time; /home/julien/.niri-configs/scripts/swayidle.sh"
 spawn-at-startup "sh" "-c" "swww-daemon & swww img /home/julien/.niri-configs/wallpapers/backdrop.png"
-spawn-at-startup "swaybg" "-i" "/home/julien/Pictures/Wallpapers/wallhaven-arch.png" "-m" "fill" "-c" "#000000"
+spawn-at-startup "swaybg" "-i" "/home/julien/Pictures/Wallpapers/Fantasy-Lanscape-Night.png" "-m" "fill" "-c" "#000000"
 layer-rule {
     match namespace="^swww-daemon$"
     place-within-backdrop true
@@ -95,16 +96,19 @@ window-rule {
     geometry-corner-radius 10
     clip-to-geometry true
     default-column-width {
-        proportion 1.0
+        proportion 0.33
     }
     open-focused true
+}
+window-rule {
+    match app-id="chromium"
+    default-column-width { proportion 0.99; }
 }
 window-rule {
     match app-id="org.gnome.Calculator"
     match app-id="com.saivert.pwvucontrol"
     match app-id="Alacritty" title="Updater"
     match app-id="kitty" title="nmtui"
-    match app-id="Alacritty" title="Wallpaper Selector"
     default-column-width {
         proportion 0.1
     }
@@ -168,6 +172,9 @@ binds {
     Mod+Backspace {
         spawn "/home/julien/.niri-configs/scripts/wlogout.sh"
     }
+    Mod+Shift+W {
+        spawn "sh" "-c" "pkill waybar; ~/.config/waybar/waybar-niri.sh"
+    }
     Mod+space {
         spawn "switch-layout"
     }
@@ -210,9 +217,9 @@ binds {
     Mod+F2 {
         move-column-to-monitor-right
     }
-    // Mod+Q {
-    //     close-window
-    // }
+    Mod+Q {
+        close-window
+    }
     Mod+MouseMiddle {
         close-window
     }
