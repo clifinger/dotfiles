@@ -6,7 +6,7 @@
   "margin-left": 10,
   "margin-right": 10,
   "spacing": 8, // Gaps between modules (8px)
-  "height": 30,
+  "height": 38,
   "modules-left": [
     "clock#date",
     "niri/language",
@@ -62,7 +62,8 @@
     "justify": "center"
   },
   "niri/language": {
-    "format": "{short}",
+    "format": "US {variant}",
+    "format-": "US"
   },
   "wireplumber": {
     "on-click": "kitty --title Wiremix --class Wiremix -e wiremix",

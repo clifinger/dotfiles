@@ -1,0 +1,11 @@
+[Unit]
+Description=Dynamic wallpaper switcher
+
+[Service]
+Type=oneshot
+ExecStart=/home/julien/.dotfiles/scripts/dynamic-wallpaper.sh
+Environment=DISPLAY=:0
+Environment=WAYLAND_DISPLAY=wayland-1
+
+[Install]
+WantedBy=default.target

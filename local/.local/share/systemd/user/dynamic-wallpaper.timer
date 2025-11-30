@@ -1,0 +1,10 @@
+[Unit]
+Description=Run dynamic wallpaper at 6h and 18h
+
+[Timer]
+OnCalendar=*-*-* 06:00:00
+OnCalendar=*-*-* 18:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
